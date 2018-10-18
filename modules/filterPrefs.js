@@ -1,7 +1,7 @@
 // import _ from 'lodash'
 import axios from 'axios'
-import Tokens from '@/modules/tokens'
-import Generators from '@/modules/generators'
+import Tokens from './tokens'
+import Generators from './generators'
 
 export const setFilterPref = (key, value) => {
   return new Promise((resolve) => {
