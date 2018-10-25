@@ -1,7 +1,7 @@
 import Tokens from './modules/tokens'
-import FilterPres from './modules/filterPrefs'
+import FilterPrefs from './modules/filterPrefs'
 
 export default {
   Tokens,
-  FilterPres
+  FilterPrefs
 }
