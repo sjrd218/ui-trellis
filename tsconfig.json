@@ -9,7 +9,7 @@
         "target": "es2015",
         "experimentalDecorators": true,
         "esModuleInterop": true,
-        "declaration": true,
+        "declaration": false,
         "typeRoots": [
             "src/types"
         ]
