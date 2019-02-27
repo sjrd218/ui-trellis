@@ -3,7 +3,9 @@ import axios from 'axios'
 import Tokens from './tokens'
 import Generators from './generators'
 
-export const setFilterPref = (key, value) => {
+import {RundeckToken} from '../interfaces/rundeckWindow'
+
+export const setFilterPref = (key: any, value: any) => {
   return new Promise((resolve) => {
     Tokens.getUIAjaxTokens().then((uiToken) => {
       Generators.generateUrl(window.appLinks.userAddFilterPref, {
@@ -25,7 +27,7 @@ export const setFilterPref = (key, value) => {
   })
 }
 
-export const unsetFilterPref = (key) => {
+export const unsetFilterPref = (key: string) => {
   return new Promise((resolve) => {
     Tokens.getUIAjaxTokens().then((uiToken) => {
       Generators.generateUrl(window.appLinks.userAddFilterPref, {

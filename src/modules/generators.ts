@@ -1,5 +1,5 @@
-export const generateUrl = (url, params) => {
-  return new Promise((resolve) => {
+export const generateUrl = (url: string, params: any) => {
+  return new Promise<string>((resolve) => {
     let urlparams = []
     if (typeof (params) === 'string') {
       urlparams = [params]
