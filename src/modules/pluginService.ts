@@ -62,27 +62,22 @@ export const getServiceProviderDescription = async (svcName:string, provider:str
     })
   }
 
-  try {
-    const resp = await client.sendRequest({
-      url: `/plugin/detail/${svcName}/${provider}`,
-      method: 'GET'
-    });
-    if (!resp.parsedBody) {
-      throw new Error(`Error getting service provider detail for ${svcName}/${provider}`);
-    }
-
-    if (!ServiceProvidersCache[svcName]) {
-      ServiceProvidersCache[svcName] = {
-        providers: {}
-      };
-    }
-    ServiceProvidersCache[svcName].providers[provider] = resp.parsedBody;
-    return resp.parsedBody;
-
+  const resp = await client.sendRequest({
+    url: `/plugin/detail/${svcName}/${provider}`,
+    method: 'GET'
+  });
+  if (!resp.parsedBody) {
+    throw new Error(`Error getting service provider detail for ${svcName}/${provider}`);
   }
-  catch (e) {
-    return console.warn('Error getting service provider detail', e);
+
+  if (!ServiceProvidersCache[svcName]) {
+    ServiceProvidersCache[svcName] = {
+      providers: {}
+    };
   }
+  ServiceProvidersCache[svcName].providers[provider] = resp.parsedBody;
+  return resp.parsedBody;
+
 }
 
 
