@@ -20,7 +20,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "ts-rundeck": "0.0.14",
-    "vue": "^2.5.17",
+    "vue": "2.5.17",
     "vue-property-decorator": "^7.3.0"
   },
   "publishConfig": {
