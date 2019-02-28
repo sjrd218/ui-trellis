@@ -16,12 +16,15 @@
 
 <template>
   <div>
+    <span v-if="error && isTitleMode" class="text-warning">
+      {{error}}
+    </span>
     <pluginInfo
       :show-title="inputShowTitle"
       :show-icon="inputShowIcon"
       :show-description="inputShowDescription"
       :detail="detail"
-      v-if="isTitleMode"
+      v-if="isTitleMode && !error"
 
       />
 
@@ -307,6 +310,7 @@ export default Vue.extend({
     return {
       props: [] as any[],
       detail: {},
+      error: null as any|null,
       propsComputedSelectorData: {},
       inputShowTitle: this.showTitle !== null ? this.showTitle : true,
       inputShowIcon: this.showIcon !== null ? this.showIcon : true,
@@ -382,9 +386,13 @@ export default Vue.extend({
       this.prepareInputs()
     },
     async loadProvider(provider: any) {
-      const data:any = await getServiceProviderDescription(this.serviceName, provider)
-      if (data.props) {
-        this.loadPluginData(data)
+      try{
+        const data:any = await getServiceProviderDescription(this.serviceName, provider)
+        if (data.props) {
+          this.loadPluginData(data)
+        }
+      }catch(e){
+        this.error=e.message
       }
     },
     isPropVisible(testProp: any): boolean {
