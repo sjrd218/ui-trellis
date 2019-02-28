@@ -26,7 +26,9 @@
       :detail="detail"
       v-if="isTitleMode && !error"
 
-      />
+      >
+      <slot name="titlePrefix"></slot>
+      </pluginInfo>
 
     <div class="row" v-if="!isTitleMode">
       <div v-if="inputShowIcon||inputShowTitle || inputShowDescription" class="col-xs-12 col-sm-12">

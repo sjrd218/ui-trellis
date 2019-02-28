@@ -1,5 +1,6 @@
 <template>
   <span>
+    <slot></slot>
     <span v-if="showIcon">
       <img :src="iconUrl" v-if="iconUrl" width="16px" height="16px">
       <i :class="'glyphicon glyphicon-'+glyphicon" v-else-if="glyphicon"></i>
