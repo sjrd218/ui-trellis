@@ -11,9 +11,10 @@
 </template>
 <script lang="ts">
 import Vue from 'vue'
+import {Collapse} from 'uiv'
 import { Component, Prop } from "vue-property-decorator"
 
-@Component
+@Component({components:{Collapse}})
 export default class Expandable extends Vue {
   @Prop({
     type: Object as () => {open: boolean, iconOpen: string, iconClosed: string, linkCss: string},
