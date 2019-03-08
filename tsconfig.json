@@ -10,9 +10,13 @@
         "experimentalDecorators": true,
         "esModuleInterop": true,
         "declaration": false,
+        "allowSyntheticDefaultImports": true,
         "typeRoots": [
             "src/types"
-        ]
+        ],
+        "paths": {
+            "@/*": ["*"],
+        },
     },
     "include": [
         "./src/**/*"

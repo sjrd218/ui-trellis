@@ -10,7 +10,8 @@ export interface RundeckContext {
     tokens: {
         [key:string]: RundeckToken
     }
-    rundeckClient: RundeckBrowser
+    rundeckClient: RundeckBrowser,
+    data:{[key:string]:string}
 }
 
 export interface RundeckToken {
