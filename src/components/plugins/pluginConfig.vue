@@ -182,20 +182,20 @@
               </template>
               <template v-else-if="prop.options && prop.options['displayType']==='CODE'">
 
-                <textarea :name="`${rkey}prop_`+pindex"
+                <!-- <textarea :name="`${rkey}prop_`+pindex"
                           v-model="inputValues[prop.name]"
                           :id="`${rkey}prop_`+pindex"
                           rows="10"
                           cols="100"
-                          class="form-control input-sm"></textarea>
-                <!-- <ace-editor :name="`${rkey}prop_`+pindex"
+                          class="form-control input-sm"></textarea> -->
+                <ace-editor :name="`${rkey}prop_`+pindex"
                             v-model="inputValues[prop.name]"
                             :lang="prop.options['codeSyntaxMode']"
-                            :codeSyntaxSelectable="prop.options['codeSyntaxSelectable']"
+                            :codeSyntaxSelectable="prop.options['codeSyntaxSelectable']==='true'"
                             :id="`${rkey}prop_`+pindex"
                             height="200"
                             width="100%"
-                            /> -->
+                            />
               </template>
               <template v-else-if="prop.options && prop.options['displayType']==='PASSWORD'">
                 <input :name="`${rkey}prop_`+pindex"
@@ -276,7 +276,7 @@
 <script lang="ts">
 import Vue from 'vue'
 
-// import AceEditor from './AceEditor.vue'
+import AceEditor from '../utils/AceEditor.vue'
 import Expandable from '../utils/Expandable.vue'
 // import JobConfigPicker from './JobConfigPicker.vue'
 import PluginInfo from './PluginInfo.vue'
@@ -291,7 +291,7 @@ export default Vue.extend({
   name: 'PluginConfig',
   components: {
     Expandable,
-    // AceEditor,
+    AceEditor,
     // JobConfigPicker,
     PluginInfo
   },
