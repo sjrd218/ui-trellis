@@ -11,7 +11,7 @@ export interface RundeckContext {
         [key:string]: RundeckToken
     }
     rundeckClient: RundeckBrowser,
-    data:{[key:string]:string}
+    data:{[key:string]:any}
 }
 
 export interface RundeckToken {
