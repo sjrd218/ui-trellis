@@ -92,14 +92,16 @@ export default Vue.extend({
             return this.detail.providerMetadata && this.detail.providerMetadata.fabicon;
         },
         shortDescription() :string{
-            if (this.description && this.description.indexOf("\n") > 0) {
-                return this.description.substring(0, this.description.indexOf("\n"));
+          const desc = this.detail.description|| this.detail.desc
+            if (desc && desc.indexOf("\n") > 0) {
+                return desc.substring(0, desc.indexOf("\n"));
             }
-            return this.description;
+            return desc;
         },
         extraDescription() :string|null{
-            if (this.description && this.description.indexOf("\n") > 0) {
-                return this.description.substring(this.description.indexOf("\n") + 1);
+          const desc = this.detail.description|| this.detail.desc
+            if (desc && desc.indexOf("\n") > 0) {
+                return desc.substring(desc.indexOf("\n") + 1);
             }
             return null;
         }
