@@ -363,11 +363,27 @@ export default Vue.extend({
         } else if (prop.type === 'Select' && typeof this.inputValues[prop.name] === 'undefined') {
           // select box should use blank string to preselect disabled option
           Vue.set(this.inputValues, prop.name, '')
+        } else if (prop.type === 'Boolean' && typeof this.inputValues[prop.name] === 'string') {
+          // boolean should convert to boolean
+          Vue.set(this.inputValues, prop.name, this.inputValues[prop.name]==='true')
         }
         this.computeSelectionAccessor(prop)
       })
     },
-
+    exportInputs(){
+      const values: { [index: string]: any } = {}
+      //convert true boolean to 'true'
+      this.props.forEach((prop: any) => {
+        if (prop.type === 'Boolean') {
+          if(this.inputValues[prop.name]===true||this.inputValues[prop.name]==='true'){
+            values[prop.name]='true'
+          }
+        }else{
+          values[prop.name]=this.inputValues[prop.name]
+        }
+      })
+      return values
+    },
     computeSelectionAccessor(prop: any) {
       if (prop.options && prop.options['selectionAccessor'] === 'PLUGIN_TYPE') {
         const serviceName = prop.options['selectionAdditional']
@@ -471,7 +487,7 @@ export default Vue.extend({
       })
     },
     exportedValues(): any{
-      return convertArrayInput(cleanConfigInput(this.inputValues))
+      return convertArrayInput(cleanConfigInput(this.exportInputs()))
     }
   },
 
