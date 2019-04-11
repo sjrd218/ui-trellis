@@ -15,6 +15,7 @@
         {{extraDescription}}
       </span>
     </span>
+    <slot name="suffix"></slot>
   </span>
 </template>
 <script lang="ts">
