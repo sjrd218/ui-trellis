@@ -83,10 +83,13 @@ export default Vue.extend({
             return this.detail.iconUrl;
         },
         glyphicon() :string{
-            return this.detail.glyphicon;
+            return this.detail.providerMetadata && this.detail.providerMetadata.glyphicon;
         },
         faicon() :string{
-            return this.detail.faicon;
+            return this.detail.providerMetadata && this.detail.providerMetadata.faicon;
+        },
+        fabicon() :string{
+            return this.detail.providerMetadata && this.detail.providerMetadata.fabicon;
         },
         shortDescription() :string{
             if (this.description && this.description.indexOf("\n") > 0) {
