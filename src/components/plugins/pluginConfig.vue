@@ -475,7 +475,7 @@ export default Vue.extend({
       this.props.forEach((prop: any) => {
         visibility[prop.name] = this.isPropVisible(prop)
         if (!visibility[prop.name]) {
-          Vue.delete(this.inputValues, prop.name)
+          Vue.delete(visibility, prop.name)
         }
       })
       return visibility
