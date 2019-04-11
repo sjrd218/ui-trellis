@@ -7,9 +7,9 @@
       <i :class="'fas fa-'+faicon" v-else-if="faicon"></i>
       <i class="rdicon icon-small plugin" v-else></i>
     </span>
-    <span class="text-info" v-if="showTitle">{{title}}</span>
-    <span class="text-muted" v-if="showDescription">{{shortDescription}}</span>
-    <span class="text-muted" v-if="showExtended && extraDescription">
+    <span :class="titleCss" v-if="showTitle">{{title}}</span>
+    <span :class="descriptionCss" v-if="showDescription">{{shortDescription}}</span>
+    <span :class="extendedCss" v-if="showExtended && extraDescription">
       <span @click="toggleExtended=!toggleExtended">More...</span>
       <span v-if="toggleExtended">
         {{extraDescription}}
@@ -36,15 +36,30 @@ export default Vue.extend({
             'default': true,
             'required': false
         },
+        'titleCss':{
+            type:String,
+            default:'text-info',
+            required:false
+        },
         'showDescription': {
             'type': Boolean,
             'default': true,
             'required': false
         },
+        'descriptionCss':{
+            type:String,
+            default:'text-muted',
+            required:false
+        },
         'showExtended': {
             'type': Boolean,
             'default': true,
             'required': false
+        },
+        'extendedCss':{
+            type:String,
+            default:'text-muted',
+            required:false
         },
         'detail': {
             'type': Object,
