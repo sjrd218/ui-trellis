@@ -140,7 +140,7 @@
                       class="form-control input-sm">
               </div>
               <div class="col-sm-5">
-                <select @change="setVal(inputValues,prop.name,$event.target.value)" class="form-control input-sm">
+                <select class="form-control input-sm" v-model="inputValues[prop.name]">
                   <option v-for="opt in prop.allowed" v-bind:value="opt" v-bind:key="opt">
                     {{prop.selectLabels && prop.selectLabels[opt] || opt}}
                   </option>
