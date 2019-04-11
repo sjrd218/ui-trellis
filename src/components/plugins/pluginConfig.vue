@@ -45,7 +45,7 @@
       </div>
       <div v-if="isShowMode && config" class="col-xs-12 col-sm-12">
         <span class="text-warning" v-if="validation && !validation.valid">
-          <i class="fas fa-exclamation-circle"></i>
+          <i class="fas fa-exclamation-circle"></i> {{validationWarningText}}
         </span>
         <span v-for="prop in props" :key="prop.name" class="configprop">
           <template v-if="config[prop.name]">
@@ -307,7 +307,8 @@ export default Vue.extend({
     'value',
     'savedProps',
     'pluginConfig',
-    'validation'
+    'validation',
+    'validationWarningText'
   ],
   data () {
     return {
