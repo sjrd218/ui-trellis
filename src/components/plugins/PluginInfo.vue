@@ -73,33 +73,35 @@ export default Vue.extend({
     },
     computed: {
         description() :string {
-            return this.detail.desc;
+            return this.detail.description|| this.detail.desc;
         },
         title() :string{
             return this.detail.title;
         },
-
+        providerMeta(): any{
+          return this.detail && this.detail.providerMetadata|| {}
+        },
         iconUrl():string {
             return this.detail.iconUrl;
         },
         glyphicon() :string{
-            return this.detail.providerMetadata && this.detail.providerMetadata.glyphicon;
+            return this.providerMeta.glyphicon;
         },
         faicon() :string{
-            return this.detail.providerMetadata && this.detail.providerMetadata.faicon;
+            return this.providerMeta.faicon;
         },
         fabicon() :string{
-            return this.detail.providerMetadata && this.detail.providerMetadata.fabicon;
+            return this.providerMeta.fabicon;
         },
         shortDescription() :string{
-          const desc = this.detail.description|| this.detail.desc
+          const desc = this.description
             if (desc && desc.indexOf("\n") > 0) {
                 return desc.substring(0, desc.indexOf("\n"));
             }
             return desc;
         },
         extraDescription() :string|null{
-          const desc = this.detail.description|| this.detail.desc
+          const desc = this.description
             if (desc && desc.indexOf("\n") > 0) {
                 return desc.substring(desc.indexOf("\n") + 1);
             }
