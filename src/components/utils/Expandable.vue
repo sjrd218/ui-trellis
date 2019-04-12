@@ -1,8 +1,10 @@
 <template>
     <span>
       <span @click="open=!open" :class="linkCss">
-        <slot name="label">More...</slot>
-        <i :class="iconCss"></i>
+        <slot name="link" :open="open">
+          <slot name="label">More...</slot>
+          <i :class="iconCss"></i>
+        </slot>
       </span>
       <collapse v-model="open">
         <slot></slot>
