@@ -31,11 +31,9 @@
         </template>
       </span>
       <span v-else class="configpair">
-        <span :title="prop.desc">{{ prop.title }}:</span>
-        <span class="text-success" v-if="prop.options && prop.options['displayType']==='PASSWORD'">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span>
-        <template v-else-if="prop.options && prop.options['displayType']==='CODE'">
-          <expandable :options="{linkCss:'expanderLink text-muted'}">
-            <template slot="label">{{value.split(/\r?\n/).length}} lines</template>
+        <template v-if="prop.options && prop.options['displayType']==='CODE'">
+          <expandable >
+            <template slot="label"><span :title="prop.desc">{{ prop.title }}:</span> <span class="text-info">{{value.split(/\r?\n/).length}} lines</span></template>
              <ace-editor
               v-model="value"
               :lang="prop.options['codeSyntaxMode']"
@@ -45,9 +43,9 @@
             />
           </expandable>
         </template>
-        <template v-else-if="prop.options && prop.options['displayType']==='MULTI_LINE'">
-          <expandable :options="{linkCss:'expanderLink text-muted'}">
-            <template slot="label">{{value.split(/\r?\n/).length}} lines</template>
+        <template v-else-if="prop.options && prop.options['displayType']==='MULTI_LINE'" >
+          <expandable>
+            <template slot="label"><span :title="prop.desc">{{ prop.title }}:</span> <span class="text-info">{{value.split(/\r?\n/).length}} lines</span></template>
             <ace-editor
               v-model="value"
               height="200"
@@ -56,7 +54,11 @@
             />
           </expandable>
         </template>
-        <span class="text-success" v-else>{{ value }}</span>
+        <span v-else>
+          <span :title="prop.desc">{{ prop.title }}:</span>
+          <span class="text-success" v-if="prop.options && prop.options['displayType']==='PASSWORD'">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span>
+          <span class="text-success" v-else>{{ value }}</span>
+        </span>
       </span>
     </span>
 </template>
