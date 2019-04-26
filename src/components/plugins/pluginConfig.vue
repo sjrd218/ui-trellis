@@ -66,13 +66,16 @@
                                 :pindex="pindex"/>
               </div>
             </div>
-            <expandable :options="{linkCss:'form-group' ,open:!group.secondary}" v-else>
-              <div slot="link" slot-scope="{open}">
-                <div class="col-sm-2 control-label input-lg">
+            <details :open="!group.secondary" v-else class="more-info details-reset">
+              <summary >
+                <span class="row">
+                  <span class="col-sm-12 h4 header-reset">
                 {{group.name!=='-' ? group.name :"More"}}
-                  <i :class="'glyphicon glyphicon-chevron-'+(open?'down':'right')"></i>
-                </div>
-              </div>
+                  <i class="more-indicator-verbiage glyphicon glyphicon-chevron-right"></i>
+                  <i class="less-indicator-verbiage glyphicon glyphicon-chevron-down"></i>
+                  </span>
+                </span>
+              </summary>
 
               <div v-for="(prop,pindex) in group.props" :key="'g_'+gindex+'/'+prop.name" :class="'form-group '+(prop.required?'required':'')+(validation &&validation.errors[prop.name]?' has-error':'')">
                 <plugin-prop-edit v-model="inputValues[prop.name]"
@@ -82,7 +85,7 @@
                                 :rkey="'g_'+gindex+'_'+rkey"
                                 :pindex="pindex"/>
               </div>
-            </expandable>
+            </details>
         </div>
       </div>
     </div>
@@ -91,11 +94,6 @@
 </template>
 
 <style lang="scss">
-.expanderLink {
-  text-decoration: underline;
-  cursor: pointer;
-}
-
 .configprop + .configprop:before {
   content: ' ';
 }
@@ -370,3 +368,9 @@ export default Vue.extend({
   }
 })
 </script>
+<style lang="scss" scoped>
+.header-reset{
+  margin:0;
+}
+</style>
+
