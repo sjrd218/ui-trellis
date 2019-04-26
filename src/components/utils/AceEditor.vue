@@ -71,7 +71,8 @@ export default Vue.extend({
     width: String,
     lang: String,
     theme: String,
-    codeSyntaxSelectable: Boolean
+    codeSyntaxSelectable: Boolean,
+    readOnly: Boolean
   },
   data () {
     return {
@@ -116,6 +117,9 @@ export default Vue.extend({
   methods: {
     aceEditorInit (ace: any) {
       this.localAce = ace
+      if(this.readOnly){
+        ace.setReadOnly(true)
+      }
     }
   }
 })
