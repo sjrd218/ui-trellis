@@ -36,13 +36,24 @@
         <template v-else-if="prop.options && prop.options['displayType']==='CODE'">
           <expandable :options="{linkCss:'expanderLink text-muted'}">
             <template slot="label">{{value.split(/\r?\n/).length}} lines</template>
-            <pre class="scriptContent apply_ace"><code>{{value}}</code></pre>
+             <ace-editor
+              v-model="value"
+              :lang="prop.options['codeSyntaxMode']"
+              height="200"
+              width="100%"
+              :readOnly="true"
+            />
           </expandable>
         </template>
         <template v-else-if="prop.options && prop.options['displayType']==='MULTI_LINE'">
           <expandable :options="{linkCss:'expanderLink text-muted'}">
             <template slot="label">{{value.split(/\r?\n/).length}} lines</template>
-            <pre class="scriptContent apply_ace"><code>{{value}}</code></pre>
+            <ace-editor
+              v-model="value"
+              height="200"
+              width="100%"
+              :readOnly="true"
+            />
           </expandable>
         </template>
         <span class="text-success" v-else>{{ value }}</span>
@@ -52,9 +63,11 @@
 <script lang="ts">
 import Vue from 'vue'
 import Expandable from '../utils/Expandable.vue'
+import AceEditor from '../utils/AceEditor.vue'
 export default Vue.extend({
   components:{
-    Expandable
+    Expandable,
+    AceEditor
   },
   props:{
     value:{
