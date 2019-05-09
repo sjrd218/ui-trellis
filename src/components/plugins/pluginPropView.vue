@@ -31,30 +31,45 @@
         </template>
       </span>
       <span v-else class="configpair">
-        <span :title="prop.desc">{{ prop.title }}:</span>
-        <span class="text-success" v-if="prop.options && prop.options['displayType']==='PASSWORD'">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span>
-        <template v-else-if="prop.options && prop.options['displayType']==='CODE'">
-          <expandable :options="{linkCss:'expanderLink text-muted'}">
-            <template slot="label">{{value.split(/\r?\n/).length}} lines</template>
-            <pre class="scriptContent apply_ace"><code>{{value}}</code></pre>
+        <template v-if="prop.options && prop.options['displayType']==='CODE'">
+          <expandable >
+            <template slot="label"><span :title="prop.desc">{{ prop.title }}:</span> <span class="text-info">{{value.split(/\r?\n/).length}} lines</span></template>
+             <ace-editor
+              v-model="value"
+              :lang="prop.options['codeSyntaxMode']"
+              height="200"
+              width="100%"
+              :readOnly="true"
+            />
           </expandable>
         </template>
-        <template v-else-if="prop.options && prop.options['displayType']==='MULTI_LINE'">
-          <expandable :options="{linkCss:'expanderLink text-muted'}">
-            <template slot="label">{{value.split(/\r?\n/).length}} lines</template>
-            <pre class="scriptContent apply_ace"><code>{{value}}</code></pre>
+        <template v-else-if="prop.options && prop.options['displayType']==='MULTI_LINE'" >
+          <expandable>
+            <template slot="label"><span :title="prop.desc">{{ prop.title }}:</span> <span class="text-info">{{value.split(/\r?\n/).length}} lines</span></template>
+            <ace-editor
+              v-model="value"
+              height="200"
+              width="100%"
+              :readOnly="true"
+            />
           </expandable>
         </template>
-        <span class="text-success" v-else>{{ value }}</span>
+        <span v-else>
+          <span :title="prop.desc">{{ prop.title }}:</span>
+          <span class="text-success" v-if="prop.options && prop.options['displayType']==='PASSWORD'">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span>
+          <span class="text-success" v-else>{{ value }}</span>
+        </span>
       </span>
     </span>
 </template>
 <script lang="ts">
 import Vue from 'vue'
 import Expandable from '../utils/Expandable.vue'
+import AceEditor from '../utils/AceEditor.vue'
 export default Vue.extend({
   components:{
-    Expandable
+    Expandable,
+    AceEditor
   },
   props:{
     value:{

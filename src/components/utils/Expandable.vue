@@ -1,15 +1,16 @@
 <template>
-    <span>
-      <span @click="open=!open" :class="linkCss">
+    <details :class="detailsCss">
+      <summary  :class="linkCss">
         <slot name="link" :open="open">
           <slot name="label">More...</slot>
-          <i :class="iconCss"></i>
+          <span class="more-indicator-verbiage"><slot name="more"><i class="glyphicon glyphicon-chevron-right"></i></slot></span>
+          <span class="less-indicator-verbiage"><slot name="less"><i class="glyphicon glyphicon-chevron-down"></i></slot></span>
         </slot>
-      </span>
-      <collapse v-model="open">
-        <slot></slot>
-      </collapse>
-    </span>
+      </summary>
+
+      <slot></slot>
+
+    </details>
 </template>
 <script lang="ts">
 import Vue from 'vue'
@@ -27,13 +28,13 @@ export default class Expandable extends Vue {
   options!: any
 
   open: boolean = !!this.options.open
-  iconOpen: string = this.options.iconOpen || 'glyphicon-chevron-down glyphicon'
-  iconClosed: string = this.options.iconClosed || 'glyphicon-chevron-right glyphicon'
   linkCss: string =this.options.linkCss || ''
 
-  get iconCss (): string {
-      return this.open ? this.iconOpen : this.iconClosed
-    }
+  css: string=this.options.css || ''
+
+  get detailsCss (): string[] {
+      return ['more-info','details-reset',this.css]
+  }
 }
 
 </script>
