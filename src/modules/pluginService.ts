@@ -24,7 +24,8 @@ const getParameters = () :Promise<{[key:string]:string}>=> {
     if (window._rundeck && window._rundeck.rdBase && window._rundeck.projectName && window._rundeck.apiVersion) {
       resolve({
         projectName: window._rundeck.projectName,
-        apiBase: `${window._rundeck.rdBase}/api/${window._rundeck.apiVersion}`
+        apiBase: `${window._rundeck.rdBase}/api/${window._rundeck.apiVersion}`,
+        rdBase: window._rundeck.rdBase
       })
     } else {
       reject(new Error('No rdBase or projectName found'))
@@ -37,9 +38,12 @@ export const getPluginProvidersForService = async (svcName:string) => {
       resolve(ServicesCache[svcName])
     })
   }
+  const params=await getParameters()
   try {
     const resp = await client.sendRequest({
-      url: `/plugin/providers/${svcName}`,
+      pathTemplate: `/plugin/providers/{svcName}`,
+      pathParameters: {svcName: svcName},
+      baseUrl: params.rdBase,
       method: 'GET'
     });
     if (!resp.parsedBody) {
@@ -61,9 +65,12 @@ export const getServiceProviderDescription = async (svcName:string, provider:str
       resolve(ServiceProvidersCache[svcName].providers[provider])
     })
   }
+  const params=await getParameters()
 
   const resp = await client.sendRequest({
-    url: `/plugin/detail/${svcName}/${provider}`,
+    pathTemplate: `/plugin/detail/{svcName}/{provider}`,
+    pathParameters: {svcName:svcName,provider:provider},
+    baseUrl: params.rdBase,
     method: 'GET'
   });
   if (!resp.parsedBody) {
@@ -84,7 +91,9 @@ export const getServiceProviderDescription = async (svcName:string, provider:str
 export const validatePluginConfig = async (svcName:string, provider:string, config:any) => {
   const params = await getParameters()
   const resp = await client.sendRequest({
-    url: `/plugin/validate/${svcName}/${provider}`,
+    pathTemplate: `/plugin/validate/{svcName}/{provider}`,
+    pathParameters: {svcName:svcName,provider:provider},
+    baseUrl: params.rdBase,
     method: 'POST',
     queryParameters: {project: '' + params.projectName},
     body: {config: config}
