@@ -21,7 +21,7 @@
         <li class="pagination-text" v-if="$slots['prefix']">
           <slot name="prefix"></slot>
         </li>
-        <li :class="{disabled:!hasPreviousButton}">
+        <li :class="{disabled:!hasPreviousButton||disabled}">
           <a href="#"
              @click.prevent="changePage(value-1)"
              title="Previous Page"
@@ -29,7 +29,7 @@
             <slot name="prevPage"><i class="glyphicon glyphicon-arrow-left"></i></slot>
           </a>
         </li>
-        <li v-for="page in pageList" :key="page.page+'/'+$index" :class="{[skipClass]:page.skip,active:page.page===value}">
+        <li v-for="page in pageList" :key="page.page+'/'+$index" :class="{[skipClass]:page.skip,active:page.page===value,disabled:disabled}">
           <span v-if="page.skip"><slot name="skip">&hellip;</slot></span>
           <a v-else-if="page.page!==value"
              href="#"
@@ -40,7 +40,7 @@
                 :class="valueClass"
                 :title="'Page '+page.page">{{page.page}}</span>
         </li>
-        <li :class="{disabled:!hasNextButton}">
+        <li :class="{disabled:!hasNextButton||disabled}">
           <a href="#"
              @click.prevent="changePage(value+1)"
              :class="navigationClass"

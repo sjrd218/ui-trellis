@@ -15,7 +15,7 @@
   -->
 <template>
   <pagination v-model="currentPage" :total-pages="totalPages" @change="changePage($event)" :disabled="disabled" v-if="pagination.total">
-    <span slot="prefix">
+    <span slot="prefix" v-if="showPrefix">
       <span class="text-info">{{pagination.offset + 1}}-{{pagination.offset + pagination.max}}</span>
       <span class="text-muted">of {{pagination.total}}</span>
     </span>
@@ -35,6 +35,9 @@ export default class OffsetPagination extends Vue {
 
   @Prop({required: true})
   pagination: any
+
+  @Prop({required:false,default:true})
+  showPrefix!: boolean
 
   @Prop({default: false})
   disabled!: boolean
