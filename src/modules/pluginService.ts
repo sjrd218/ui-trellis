@@ -21,14 +21,13 @@ const ServiceProvidersCache: { [provider: string]: any } = {}
 
 const getParameters = () :Promise<{[key:string]:string}>=> {
   return new Promise((resolve, reject) => {
-    if (window._rundeck && window._rundeck.rdBase && window._rundeck.projectName && window._rundeck.apiVersion) {
+    if (window._rundeck && window._rundeck.rdBase && window._rundeck.apiVersion) {
       resolve({
-        projectName: window._rundeck.projectName,
         apiBase: `${window._rundeck.rdBase}/api/${window._rundeck.apiVersion}`,
         rdBase: window._rundeck.rdBase
       })
     } else {
-      reject(new Error('No rdBase or projectName found'))
+      reject(new Error('No rdBase found'))
     }
   })
 }
@@ -95,7 +94,6 @@ export const validatePluginConfig = async (svcName:string, provider:string, conf
     pathParameters: {svcName:svcName,provider:provider},
     baseUrl: params.rdBase,
     method: 'POST',
-    queryParameters: {project: '' + params.projectName},
     body: {config: config}
   })
   if (!resp.parsedBody) {
