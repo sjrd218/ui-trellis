@@ -22,7 +22,7 @@
 
     <modal v-model="modalOpen" :title="'Choose A Job'" ref="modal" append-to-body>
 
-      <project-picker v-model="project"></project-picker>
+      <div><label>Project:</label><project-picker v-model="project"></project-picker></div>
 
       <div class="list-group" v-for="(item,name) in jobTree.groups" :key="'group'+name">
         <div class="list-group-item" v-if="name && item.jobs.length>0">
