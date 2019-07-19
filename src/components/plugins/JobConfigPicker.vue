@@ -64,6 +64,7 @@ import ProjectPicker from './ProjectPicker.vue'
 import { Component, Prop, Watch } from 'vue-property-decorator'
 import { client } from '../../modules/rundeckClient'
 
+Vue.component("project-picker",ProjectPicker)
 
 @Component
 export default class JobConfigPicker extends Vue {
