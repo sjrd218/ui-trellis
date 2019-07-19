@@ -17,10 +17,10 @@
 <template>
   <div>
     <btn @click="modalOpen=true">
-      <slot>{{$t('choose a job')}} &hellip;</slot>
+      <slot>Choose A Job &hellip;</slot>
     </btn>
 
-    <modal v-model="modalOpen" :title="$t('choose a job')" ref="modal" append-to-body>
+    <modal v-model="modalOpen" :title="'Choose A Job'" ref="modal" append-to-body>
 
       <project-picker v-model="project"></project-picker>
 
@@ -48,7 +48,7 @@
         </div>
       </div>
       <div slot="footer">
-        <btn @click="modalOpen=false">{{$t('cancel')}}</btn>
+        <btn @click="modalOpen=false">Cancel</btn>
       </div>
 
     </modal>
