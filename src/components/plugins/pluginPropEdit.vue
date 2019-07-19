@@ -157,9 +157,9 @@
           >{{opt.key}}</option>
         </select>
       </div>
-      <!--<div v-if="prop.options && prop.options['selectionAccessor']==='RUNDECK_JOB'" class="col-sm-5">-->
-      <!--<job-config-picker v-model="currentValue"></job-config-picker>-->
-      <!--</div>-->
+      <div v-if="prop.options && prop.options['selectionAccessor']==='RUNDECK_JOB'" class="col-sm-5">
+        <job-config-picker :project="project" v-model="currentValue"></job-config-picker>
+      </div>
       <slot
         v-else-if="prop.options && prop.options['selectionAccessor'] "
         name="accessors"
@@ -181,10 +181,12 @@
 <script lang="ts">
 import Vue from "vue"
 
+import JobConfigPicker from './JobConfigPicker.vue'
 import AceEditor from '../utils/AceEditor.vue'
 export default Vue.extend({
   components:{
     AceEditor,
+    JobConfigPicker
   },
   props:[
     'prop',
