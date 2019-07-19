@@ -78,14 +78,18 @@ export default class JobConfigPicker extends Vue {
 
 @Watch('project')
   loadJobs() {
-    client.jobList(this.project).then(result => {
-      this.jobs = result
-      this.jobs.forEach(job => this.jobTree.insert(job))
-    })
+    if(this.project != '') {
+      console.log("list jobs for project: " + this.project)
+      client.jobList(this.project).then(result => {
+        this.jobs = result
+        this.jobs.forEach(job => this.jobTree.insert(job))
+      })
+    }
   }
 
   @Watch('selectedJob')
   jobChosen() {
+    console.log("job chosen: " + this.selectedJob)
     this.modalOpen = false
     this.$emit('input', this.selectedJob ? this.selectedJob.id : '')
   }
