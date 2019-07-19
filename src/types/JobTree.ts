@@ -28,6 +28,6 @@ export class JobTree implements GroupedJobs {
   }
   insert(job: Job) {
     const item = this.locateTreeItem(job.group || '')
-    item.jobs.push(job)
+    if(item.jobs.indexOf(job) == -1) item.jobs.push(job)
   }
 }

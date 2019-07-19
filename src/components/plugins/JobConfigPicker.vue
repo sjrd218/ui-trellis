@@ -80,7 +80,7 @@ export default class JobConfigPicker extends Vue {
 @Watch('project')
   loadJobs() {
     if(this.project != '') {
-      console.log("list jobs for project: " + this.project)
+      this.jobTree = new JobTree()
       client.jobList(this.project).then(result => {
         this.jobs = result
         this.jobs.forEach(job => this.jobTree.insert(job))
@@ -90,14 +90,10 @@ export default class JobConfigPicker extends Vue {
 
   @Watch('selectedJob')
   jobChosen() {
-    console.log("job chosen: " + this.selectedJob)
     this.modalOpen = false
     this.$emit('input', this.selectedJob ? this.selectedJob.id : '')
   }
 
-//   mounted() {
-//     this.loadJobs()
-//   }
 }
 </script>
 <style lang="scss">

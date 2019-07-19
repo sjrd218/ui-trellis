@@ -16,7 +16,7 @@
 
 <template>
   <div>
-    <select v-bind:value="value" v-on:input="$emit('input',$event.target.value)" class="form-element">
+    <select v-bind:value="value" v-on:input="$emit('input',$event.target.value)" class="form-control">
         <option v-for="project in projects" :key="project" v-bind:value="project">{{project}}</option>
     </select> 
   </div>
