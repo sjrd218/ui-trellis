@@ -22,7 +22,7 @@
 
     <modal v-model="modalOpen" :title="'Choose A Job'" ref="modal" append-to-body>
 
-      <div><label>Project:</label><project-picker v-model="project"></project-picker></div>
+      <div v-if="showProjectSelector"><label>Project:</label><project-picker v-model="project"></project-picker></div>
 
       <div class="list-group" v-for="(item,name) in jobTree.groups" :key="'group'+name">
         <div class="list-group-item" v-if="name && item.jobs.length>0">
@@ -76,6 +76,7 @@ export default class JobConfigPicker extends Vue {
   jobs: Job[] = []
   jobTree: JobTree = new JobTree()
   project: string = ''
+  showProjectSelector: boolean = true
 
 @Watch('project')
   loadJobs() {
@@ -94,6 +95,12 @@ export default class JobConfigPicker extends Vue {
     this.$emit('input', this.selectedJob ? this.selectedJob.id : '')
   }
 
+  mounted() {
+    if(window._rundeck.projectName) {
+      this.showProjectSelector = false
+      this.project = window._rundeck.projectName
+    }
+  }
 }
 </script>
 <style lang="scss">
