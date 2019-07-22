@@ -135,12 +135,15 @@
           <span v-else>{{prop.staticTextDefaultValue}}</span>
         </template>
         <template v-else-if="prop.options && prop.options['displayType']==='RUNDECK_JOB'">
-          <span
+          <input
             :name="`${rkey}prop_`+pindex"
             :id="`${rkey}prop_`+pindex"
+            readonly
+            size="100"
             class="form-control input-sm"
             v-bind:title="currentValue"
-          >{{jobName}}</span>
+            v-bind:value="jobName"
+          >
         </template>
         <input
           :name="`${rkey}prop_`+pindex"
