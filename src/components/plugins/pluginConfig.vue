@@ -360,11 +360,7 @@ export default Vue.extend({
       return convertArrayInput(cleanConfigInput(this.exportInputs()))
     }
   },
-  mounted() {
-    console.log("mounted")
-  },
   beforeMount () {
-    console.log("before mount")
     this.loadForMode()
   }
 })
