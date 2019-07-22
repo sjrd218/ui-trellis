@@ -139,6 +139,7 @@
             :name="`${rkey}prop_`+pindex"
             :id="`${rkey}prop_`+pindex"
             class="form-control input-sm"
+            v-bind:title="currentValue"
           >{{jobName}}</span>
         </template>
         <input
@@ -165,7 +166,7 @@
         </select>
       </div>
       <div v-if="prop.options && prop.options['selectionAccessor']==='RUNDECK_JOB'" class="col-sm-5">
-        <job-config-picker :project="project" v-model="currentValue"></job-config-picker>
+        <job-config-picker v-model="currentValue"></job-config-picker>
       </div>
       <slot
         v-else-if="prop.options && prop.options['selectionAccessor'] "
@@ -210,6 +211,19 @@ export default Vue.extend({
         return 'col-sm-5'
       }
       return 'col-sm-10'
+    },
+    setJobName(jobUuid) {
+      if((jobUuid && jobUuid.length > 0) && (this.prop.options && this.prop.options['displayType']==='RUNDECK_JOB')) {
+        console.log("get job info for uuid: " + jobUuid)
+        client.jobInfoGet(jobUuid).then(response => {
+          if(response.name) {
+            var output = ''
+            if(response.group) output += response.group+"/"
+            output += response.name + " ("+response.project+")"
+            this.jobName = output
+          }
+        })
+      }
     }
   },
   data(){
@@ -221,22 +235,14 @@ export default Vue.extend({
   watch:{
     currentValue:function(newval){
       this.$emit('input',newval)
-      console.log("newval:" + newval)
-      if((newval && newval.length > 0) && (this.prop.options && this.prop.options['displayType']==='RUNDECK_JOB')) {
-        console.log("get job info for uuid: " + newval)
-        client.jobInfoGet(newval).then(response => {
-          if(response._response.parsedBody.name) {
-            this.jobName = response._response.parsedBody.name
-          }
-        })
-      }
+      this.setJobName(newval)
     },
     value:function(newval){
       this.currentValue = newval
     }
   },
   mounted(){
-
+    this.setJobName(this.value)
   }
 })
 </script>
