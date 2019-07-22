@@ -293,6 +293,11 @@ export default Vue.extend({
       handler(newValue,oldValue){
         this.loadForMode()
       }
+    },
+    value: {
+      handerl(newV,oldV) {
+        console.log('the value changed')
+      }
     }
   },
   computed: {
