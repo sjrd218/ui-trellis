@@ -295,7 +295,7 @@ export default Vue.extend({
       }
     },
     value: {
-      handerl(newV,oldV) {
+      handler(newV,oldV) {
         console.log('the value changed')
       }
     }
