@@ -80,8 +80,8 @@ export default class JobConfigPicker extends Vue {
 
 @Watch('project')
   loadJobs() {
+    this.jobTree = new JobTree()
     if(this.project != '') {
-      this.jobTree = new JobTree()
       client.jobList(this.project).then(result => {
         this.jobs = result
         this.jobs.forEach(job => this.jobTree.insert(job))
