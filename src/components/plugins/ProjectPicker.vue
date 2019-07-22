@@ -40,8 +40,9 @@ export default class ProjectPicker extends Vue {
   projects: string[] = []
 
   loadProjects() {
+      this.projects.push('')
       client.projectList().then(result => {
-          result._response.parsedBody.forEach(prj => {
+          result.forEach(prj => {
               if(prj.name) this.projects.push(prj.name)
           })
       })

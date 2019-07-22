@@ -217,7 +217,6 @@ export default Vue.extend({
     },
     setJobName(jobUuid: string) {
       if((jobUuid && jobUuid.length > 0) && (this.prop.options && this.prop.options['displayType']==='RUNDECK_JOB')) {
-        console.log("get job info for uuid: " + jobUuid)
         client.jobInfoGet(jobUuid).then(response => {
           if(response.name) {
             var output = ''
