@@ -212,7 +212,7 @@ export default Vue.extend({
       }
       return 'col-sm-10'
     },
-    setJobName(jobUuid) {
+    setJobName(jobUuid: string) {
       if((jobUuid && jobUuid.length > 0) && (this.prop.options && this.prop.options['displayType']==='RUNDECK_JOB')) {
         console.log("get job info for uuid: " + jobUuid)
         client.jobInfoGet(jobUuid).then(response => {
