@@ -135,14 +135,11 @@
           <span v-else>{{prop.staticTextDefaultValue}}</span>
         </template>
         <template v-else-if="prop.options && prop.options['displayType']==='RUNDECK_JOB'">
-          <input
+          <span
             :name="`${rkey}prop_`+pindex"
             :id="`${rkey}prop_`+pindex"
-            size="100"
-            readonly
             class="form-control input-sm"
-            v-bind:value="jobName"
-          >
+          >{{jobName}}</span>
         </template>
         <input
           :name="`${rkey}prop_`+pindex"
@@ -224,6 +221,7 @@ export default Vue.extend({
   watch:{
     currentValue:function(newval){
       this.$emit('input',newval)
+      console.log("newval:" + newval)
       if((newval && newval.length > 0) && (this.prop.options && this.prop.options['displayType']==='RUNDECK_JOB')) {
         console.log("get job info for uuid: " + newval)
         client.jobInfoGet(newval).then(response => {
