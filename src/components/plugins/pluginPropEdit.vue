@@ -218,7 +218,7 @@ export default Vue.extend({
   data(){
     return{
       currentValue: this.value,
-      jobName: undefined
+      jobName: ''
     }
   },
   watch:{
