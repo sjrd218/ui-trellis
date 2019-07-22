@@ -141,7 +141,7 @@
             size="100"
             readonly
             class="form-control input-sm"
-            v-bind="rundeckJobName"
+            v-bind:value="jobName"
           >
         </template>
         <input
@@ -193,6 +193,7 @@ import Vue from "vue"
 
 import JobConfigPicker from './JobConfigPicker.vue'
 import AceEditor from '../utils/AceEditor.vue'
+import { client } from '../../modules/rundeckClient'
 export default Vue.extend({
   components:{
     AceEditor,
@@ -216,17 +217,19 @@ export default Vue.extend({
   },
   data(){
     return{
-      currentValue: this.value
-    }
-  },
-  computed: {
-    rundeckJobName() {
-      return "rundeck job name goes here"
+      currentValue: this.value,
+      jobName: undefined
     }
   },
   watch:{
     currentValue:function(newval){
       this.$emit('input',newval)
+      if((newval && newval.length > 0) && (this.prop.options && this.prop.options['displayType']==='RUNDECK_JOB')) {
+        console.log("get job info for uuid: " + newval)
+        client.jobInfoGet(newval).then(response => {
+          this.jobName = response._response.parsedBody.name
+        })
+      }
     },
     value:function(newval){
       this.currentValue = newval
