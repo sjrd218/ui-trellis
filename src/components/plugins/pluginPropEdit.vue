@@ -134,6 +134,16 @@
           >{{prop.staticTextDefaultValue}}</span>
           <span v-else>{{prop.staticTextDefaultValue}}</span>
         </template>
+        <template v-else-if="prop.options && prop.options['displayType']==='RUNDECK_JOB'">
+          <input
+            :name="`${rkey}prop_`+pindex"
+            :id="`${rkey}prop_`+pindex"
+            size="100"
+            readonly
+            class="form-control input-sm"
+            v-bind="rundeckJobName"
+          >
+        </template>
         <input
           :name="`${rkey}prop_`+pindex"
           v-model="currentValue"
@@ -207,6 +217,11 @@ export default Vue.extend({
   data(){
     return{
       currentValue: this.value
+    }
+  },
+  computed: {
+    rundeckJobName() {
+      return "rundeck job name goes here"
     }
   },
   watch:{
